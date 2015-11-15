@@ -1,13 +1,29 @@
 ---
 title: "Reproducible Research: Peer Assessment 1"
+author: "Zikun wu"
+date: "November 15, 2015"
 output: 
   html_document:
     keep_md: true
 ---
 
+## Setting global options
+```{r}
+echo = TRUE  # Make code visible so that someone else will be able to read them
+options(scipen = 1)  # Turn off scientific notations for numbers
+```
 
 ## Loading and preprocessing the data
-
+```{r}
+unzip("activity.zip") # Make sure you set your working directory right in order to unzip file
+data <- read.csv("activity.csv", colClasses = c("integer", "Date", "factor"))
+data$month <- as.numeric(format(data$date, "%m"))
+noNA <- na.omit(data)
+rownames(noNA) <- 1:nrow(noNA)
+head(noNA)
+dim(noNA)
+library(ggplot2)
+```
 
 
 ## What is mean total number of steps taken per day?
